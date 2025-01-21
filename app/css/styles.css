@@ -1,24 +1,24 @@
+/* Global Reset */
 *,
 *::after,
 *::before {
   padding: 0;
   margin: 0;
-  font-family: inherit;
   box-sizing: border-box;
 }
+
+/* Body and HTML */
 html,
 body {
   font-family: sans-serif;
   background-color: #25102b;
   color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
 }
-button {
-  cursor: pointer;
-}
+
+/* Accessibility - Visually Hidden Elements */
 .visually-hidden {
   position: absolute !important;
   clip: rect(1px, 1px, 1px, 1px);
@@ -29,18 +29,31 @@ button {
   overflow: hidden;
   white-space: nowrap;
 }
+
+/* General Styles */
+button {
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Text Sizes */
 .text_large {
   font-size: 32px;
 }
 .text_small {
   font-size: 24px;
 }
+
+/* Wrapper */
 .wrapper {
   display: flex;
   flex-direction: column;
   width: 70%;
+  max-width: var(--max-content-width, 455px); /* Use variable for consistency */
+  margin: 0 auto;
 }
-@media (max-width: 510px) {
+
+@media (max-width: 576px) {
   .wrapper {
     width: 100%;
   }
@@ -48,6 +61,8 @@ button {
     justify-content: center;
   }
 }
+
+/* Header */
 header {
   display: flex;
   align-items: center;
@@ -55,17 +70,20 @@ header {
   gap: 12px;
   padding: 42px;
 }
+
+/* Hero Section */
 .todohero_section {
   border: 1px solid #c2b39a;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   align-self: center;
   width: 90%;
-  max-width: 455px;
+  max-width: var(--max-content-width, 455px);
   padding: 12px;
   border-radius: 11px;
 }
+
 .todohero_section div:last-child {
   background-color: #88ab33;
   width: 150px;
@@ -77,18 +95,22 @@ header {
   justify-content: center;
   text-align: center;
 }
+
+/* Form */
 .form {
   align-self: center;
   width: 97%;
-  max-width: 455px;
+  max-width: var(--max-content-width, 455px);
   display: flex;
   align-items: center;
   gap: 12px;
   margin-top: 38px;
 }
+
 .form label {
   width: 90%;
 }
+
 .form input {
   background-color: #1f2937;
   color: #fff;
@@ -98,25 +120,44 @@ header {
   border: none;
   border-radius: 11px;
   padding: 12px;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
 }
+
+.form input:focus {
+  box-shadow: 0 0 4px #88ab33;
+  background-color: #2a3a47;
+}
+
 .form button {
-  width: 10%;
+  width: 50px;
   height: 50px;
   border-radius: 11px;
   background-color: #9d33ab;
   border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
+.form button:hover {
+  background-color: #871a91;
+  transform: scale(1.05);
+}
+
+/* To-Do List */
 .todo_list {
   align-self: center;
   width: 97%;
-  max-width: 455px;
+  max-width: var(--max-content-width, 455px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 27px;
-  margin-bottom: 27px;
+  margin: 27px 0;
   gap: 27px;
 }
+
+/* To-Do Item */
 .todo_item,
 .edit-form input {
   display: flex;
@@ -124,24 +165,29 @@ header {
   align-items: center;
   height: 70px;
   width: 100%;
-  max-width: 455px;
+  max-width: var(--max-content-width, 455px);
   border: 1px solid #c2b39a;
   font-size: 16px;
   background-color: #0d0d0d;
   color: #fff;
   padding: 12px;
 }
+
 .edit-form input {
-  outline: transparent;
+  outline: none;
   width: calc(100% - 14px);
   height: calc(100% - 12px);
-  border: transparent;
+  border: none;
+  background-color: transparent;
 }
+
+/* To-Do Items Left and Right */
 .todo_items_left,
 .todo_items_right {
   display: flex;
   align-items: center;
 }
+
 .todo_items_left {
   background-color: transparent;
   border: none;
@@ -149,14 +195,28 @@ header {
   gap: 12px;
   font-size: 16px;
 }
+
 .todo_items_right {
   gap: 4px;
 }
+
 .todo_items_right button {
   background-color: transparent;
   color: #fff;
   border: none;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
+
+.todo_items_right button:hover {
+  color: #88ab33;
+  transform: scale(1.1);
+}
+
 .todo_items_right button svg {
   fill: #c2b39a;
+  transition: fill 0.3s ease;
+}
+
+.todo_items_right button:hover svg {
+  fill: #88ab33;
 }
