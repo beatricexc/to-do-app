@@ -4,6 +4,8 @@ import Form from "@/src/components/Form";
 import Header from "@/src/components/Header";
 import TODOHero from "@/src/components/TODOHero"; 
 import TODOList from "@/src/components/TODOList";
+import ParticleBackground from "@/src/components/ParticleBackground";
+
 
 function Home() {
   const [todos, setTodos] = React.useState([]);
@@ -13,6 +15,7 @@ function Home() {
     const total_todos = todos.length;
     return (
       <div className="wrapper">
+        <ParticleBackground />
         <Header />
         <TODOHero todos_completed = {todos_completed} total_todos={total_todos}/>
         <Form setTodos={setTodos}/>
