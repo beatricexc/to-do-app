@@ -1,21 +1,11 @@
-import React, { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
-
-// Dynamically import Particles with SSR disabled
-const Particles = dynamic(() => import("react-tsparticles"), { ssr: false });
+import React from "react";
+import Particles from "react-tsparticles";
+import { loadSlim } from "tsparticles-slim"; // Slim engine for better performance
 
 const ParticleBackground = () => {
-  const [mounted, setMounted] = useState(false);
-
-  // Use effect to set mounted state to true only after the client is mounted
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Do not render particles until the component is mounted on the client
-  if (!mounted) {
-    return null;
-  }
+  const particlesInit = async (engine) => {
+    await loadSlim(engine); // Loads the slim version of tsparticles
+  };
 
   const particlesOptions = {
     background: {
@@ -25,39 +15,69 @@ const ParticleBackground = () => {
     },
     particles: {
       number: {
-        value: 100, // Number of particles
+        value: 100,
         density: {
           enable: true,
-          value_area: 1000,
+          area: 800,
+        },
+      },
+      color: {
+        value: "#ffffff", // White particles
+      },
+      shape: {
+        type: "circle",
+      },
+      opacity: {
+        value: 0.5,
+        animation: {
+          enable: true,
+          speed: 1,
+          minimumValue: 0.1,
+          sync: false,
         },
       },
       size: {
-        value: 5, // Particle size
+        value: 3,
+        random: true,
       },
       move: {
         enable: true,
-        speed: 2,
+        speed: 1,
         direction: "none",
-        random: true,
+        random: false,
+        straight: false,
+        outModes: {
+          default: "bounce",
+        },
+      },
+      links: {
+        enable: true,
+        distance: 150,
+        color: "#ffffff",
+        opacity: 0.4,
+        width: 1,
       },
     },
+    interactivity: {
+      events: {
+        onHover: {
+          enable: true,
+          mode: "grab",
+        },
+      },
+      modes: {
+        grab: {
+          distance: 200,
+          links: {
+            opacity: 0.8,
+          },
+        },
+      },
+    },
+    detectRetina: true,
   };
-  console.log("Particles options: ", particlesOptions);
 
-  return (
-    <div
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        zIndex: -1, // Ensure particles are behind content
-      }}
-    >
-      <Particles id="tsparticles" options={particlesOptions} />
-    </div>
-  );
+  return <Particles id="tsparticles" init={particlesInit} options={particlesOptions} />;
 };
 
 export default ParticleBackground;
