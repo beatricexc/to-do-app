@@ -22,7 +22,7 @@ const ParticleBackground = () => {
         },
       },
       color: {
-        value: "#ffffff", // White particles
+        value: "#ad66ee",
       },
       shape: {
         type: "circle",
