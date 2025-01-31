@@ -1,7 +1,7 @@
 function Header() {
     return (
         <>
-            <svg
+            <svg class="logo"
                 xmlns="http://www.w3.org/2000/svg"
                 clipRule="evenodd"
                 fillRule="evenodd"
